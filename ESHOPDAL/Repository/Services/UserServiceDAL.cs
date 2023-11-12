@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using ESHOPDAL.Repository.Interfaces;
+using ESHOPDomainModels.Models._01.User;
 using ESHOPDomainModels.Models.User;
 using System.Data.Common;
 using System.Data.SqlClient;
@@ -47,17 +48,85 @@ namespace ESHOPDAL.Repository.Services
         public User GetUsersById(Guid id)
         {
 
-            return connection.QueryFirst<User>(" SELECT * FROM Users WHERE Id = @id " ,  new {id});
+            return connection.QueryFirst<User>(" SELECT * FROM Users WHERE Id = @id ");
+        }
+
+
+        public void UpdateUserInfo(User user, string info, Guid id)
+        {
+            var validColumnNames = new List<string> { "LastName", "FirstName", "Email", "Password", "Address" };
+
+            if (!validColumnNames.Contains(info))
+            {
+                throw new ArgumentException("Nom de colonne non valide.", nameof(info));
+            }
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@Id", id);
+
+            string sql = $"UPDATE Users SET {info} = @Value WHERE Id = @Id";
+
+            // Utilisez la réflexion pour obtenir la valeur de la propriété
+            object propertyValue = typeof(User).GetProperty(info)?.GetValue(user);
+
+            parameters.Add("@Value", propertyValue);
+
+            connection.ExecuteScalar(sql, parameters);
+        }
+
+
+        public string GetUserInfoValue( string info)
+        {
+            switch (info)
+            {
+                case "LastName":
+                    return "user.LastName";
+                case "FirstName":
+                    return "user.FirstName";
+                case "Email":
+                    return "user.Email";
+                case "Password":
+                    return "user.Password";
+                case "Address":
+                    return "user.Address";
+                default:
+                    throw new ArgumentException("Nom de colonne non géré.", nameof(info));
+            }
         }
 
 
         ////////////////Connection
-       
 
-        public string CheckPassword(string email)
+
+        public void Register(CreateUser user)
         {
-            string sql = " SELECT Password FROM Users WHERE Email = @email";
-            return connection.QueryFirst<string>(sql, new { email });
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
+
+            string sql = "INSERT INTO Users (LastName, FirstName, Email, Status, Address, Password) " +
+                         "VALUES (@LastName, @FirstName, @Email, @Status, @Address, @Password)";
+
+            var param = new
+            {
+                user.LastName,
+                user.FirstName,
+                user.Email,
+                user.Status,
+                user.Address,
+                Password = hashedPassword 
+            };
+
+            connection.Execute(sql, param);
+        }
+
+
+        public bool CheckPassword(string email, string password)
+        {
+            // Récupérer le mot de passe haché depuis la base de données
+            var storedPassword = connection.QueryFirst<string>("SELECT Password FROM Users WHERE Email = @email", new { email });
+
+            string hash = BCrypt.Net.BCrypt.HashPassword(password);
+
+            return BCrypt.Net.BCrypt.Verify(password, storedPassword);
         }
 
 
@@ -65,7 +134,7 @@ namespace ESHOPDAL.Repository.Services
         {
             string sql = " SELECT * FROM Users WHERE  Email = @email";
 
-            var param = new {email};
+            var param = new { email };
 
             return connection.QueryFirst<User> (sql , param);
         }

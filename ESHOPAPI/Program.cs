@@ -19,6 +19,14 @@ builder.Services.AddTransient(sp => new SqlConnection(
 
 builder.Services.AddScoped<IUserServiceDAL, UserServiceDAL>();
 builder.Services.AddScoped<IUserServiceBLL, UserServiceBLL>();
+builder.Services.AddScoped<ICategoryServiceBLL, CategoryServiceBLL>();
+builder.Services.AddScoped<ICategoryServiceDAL, CategoryServiceDAL>();
+builder.Services.AddScoped<IProductServiceDAL, ProductServiceDAL>();
+builder.Services.AddScoped<IProductServiceBLL, ProductServiceBLL>();
+builder.Services.AddScoped<IProductReviewServiceDAL, ProductReviewServiceDAL>();
+builder.Services.AddScoped<IProductReviewServiceBLL, ProductReviewServiceBLL>();
+builder.Services.AddScoped<ICartItemServiceBLL, CartItemServiceBLL>();
+builder.Services.AddScoped<ICartItemServiceDAL, CartItemServiceDAL>();
 
 var app = builder.Build();
 

@@ -1,4 +1,10 @@
-﻿namespace ESHOPDomainModels.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ESHOPDomainModels.Models._03.Product
 {
     public class Product
     {
@@ -16,6 +22,6 @@
 
         public int Rating { get; set; }
 
-        public Guid CategoryId { get; set; }
+        public string CategoryName { get; set; }
     }
 }

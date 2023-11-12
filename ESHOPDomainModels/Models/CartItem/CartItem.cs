@@ -1,4 +1,4 @@
-﻿namespace ESHOPDomainModels.Models
+﻿namespace ESHOPDomainModels.Models.CartItem
 {
     public class CartItem
     {
@@ -13,3 +13,4 @@
         public decimal ItemPrice { get; set; }
     }
 }
+

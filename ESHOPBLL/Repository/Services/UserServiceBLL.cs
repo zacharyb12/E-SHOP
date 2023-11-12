@@ -1,5 +1,6 @@
 ﻿using ESHOPBLL.Repository.Interfaces;
 using ESHOPDAL.Repository.Interfaces;
+using ESHOPDomainModels.Models._01.User;
 using ESHOPDomainModels.Models.User;
 using System;
 using System.Collections.Generic;
@@ -34,11 +35,56 @@ namespace ESHOPBLL.Repository.Services
             return userService.GetUsersById(id);
         }
 
-        private bool CheckPassword(string password, string email)
+        public void UpdateUserInfo(User user, string info , Guid id)
         {
-            string hash = userService.CheckPassword(email);
+            switch (info)
+            {
+                case ("LastName"):
+                    info = "LastName";
+                    break;
 
-            return BCrypt.Net.BCrypt.Verify(password, hash);
+                case ("FirstName"):
+                    info = "FirstName";
+                    break;
+
+                case ("Email"):
+                    info = "Email";
+                    break;
+
+                case ("Password"):
+                    info = "Password";
+                    break;
+
+                case ("Address"):
+                    info = "Adress";
+                    break;
+            }
+             userService.UpdateUserInfo(user, info, id);
+        }
+
+
+
+        public void Register(string email, string password, string lastName, string firstName, string status, string address)
+        {
+
+
+            var user = new CreateUser
+            {
+                LastName = lastName,
+                FirstName = firstName,
+                Email = email,
+                Status = status,
+                Address = address,
+                Password = password  // Utiliser le mot de passe haché
+            };
+
+            userService.Register(user);
+        }
+
+
+        private bool CheckPassword(string email, string Password)
+        {
+            return userService.CheckPassword(email, Password);
         }
 
         public User Login(string email , string password) 
@@ -49,6 +95,5 @@ namespace ESHOPBLL.Repository.Services
             }
             throw new InvalidOperationException("Wrong Password");
         }
-
     }
 }

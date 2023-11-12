@@ -1,4 +1,5 @@
-﻿using ESHOPDomainModels.Models.User;
+﻿using ESHOPDomainModels.Models._01.User;
+using ESHOPDomainModels.Models.User;
 
 namespace ESHOPDAL.Repository.Interfaces
 {
@@ -10,8 +11,12 @@ namespace ESHOPDAL.Repository.Interfaces
 
         User GetUsersById(Guid id);
 
+        void UpdateUserInfo(User user, string info, Guid id);
 
-        string CheckPassword(string email);
+
+        void Register(CreateUser user);
+
+        bool CheckPassword(string email, string Password);
 
         User Login(string email);
     }
