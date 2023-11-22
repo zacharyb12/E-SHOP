@@ -26,7 +26,7 @@ namespace ESHOPBLL.Repository.Services
 
         public Category GetCategoryByName(string name)
         {
-            return categoryService.GetCategoryByName(name);
+           return categoryService.GetCategoryByName(name);   
         }
 
         public void UpdateCategory(Category category)

@@ -1,11 +1,10 @@
-﻿using ESHOPDomainModels.Models._01.User;
-using ESHOPDomainModels.Models.User;
+﻿using ESHOPDomainModels.Models.User;
 
 namespace ESHOPDAL.Repository.Interfaces
 {
     public interface IUserServiceDAL
     {
-        void CreateUser(CreateUser user);
+        //void CreateUser(CreateUser user);
 
         IEnumerable<User> GetUsers();
 
@@ -13,11 +12,11 @@ namespace ESHOPDAL.Repository.Interfaces
 
         void UpdateUserInfo(User user, string info, Guid id);
 
-
+        //Connection
         void Register(CreateUser user);
 
         bool CheckPassword(string email, string Password);
 
-        User Login(string email);
+        string Login(string email, string password);
     }
 }

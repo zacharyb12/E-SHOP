@@ -1,12 +1,6 @@
 ﻿using ESHOPBLL.Repository.Interfaces;
 using ESHOPDAL.Repository.Interfaces;
-using ESHOPDomainModels.Models._01.User;
 using ESHOPDomainModels.Models.User;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ESHOPBLL.Repository.Services
 {
@@ -19,11 +13,11 @@ namespace ESHOPBLL.Repository.Services
             this.userService = userService;
         }
 
-        public void CreateUser(CreateUser user)
-        {
-            userService.CreateUser(user);
+        //public void CreateUser(CreateUser user)
+        //{
+        //    userService.CreateUser(user);
 
-        }
+        //}
 
         public IEnumerable<User> GetUsers() 
         { 
@@ -81,13 +75,12 @@ namespace ESHOPBLL.Repository.Services
             userService.Register(user);
         }
 
-
         private bool CheckPassword(string email, string Password)
         {
             return userService.CheckPassword(email, Password);
         }
 
-        public User Login(string email , string password) 
+        public string Login(string email , string password) 
         {
             if (CheckPassword(email , password)) 
             {
@@ -95,5 +88,6 @@ namespace ESHOPBLL.Repository.Services
             }
             throw new InvalidOperationException("Wrong Password");
         }
+
     }
 }

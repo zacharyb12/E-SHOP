@@ -13,6 +13,8 @@ namespace ESHOPBLL.Repository.Interfaces
 
         IEnumerable<ProductReview> GetProductReviewByUserId(Guid id);
 
+        public IEnumerable<ProductReview> GetProductReviewByProductId(Guid id);
+
         IEnumerable<ProductReview> GetProductReviews();
     }
 }

@@ -39,6 +39,11 @@ namespace ESHOPBLL.Repository.Services
             return productService.GetByName(name);
         }
 
+        public  IEnumerable<Product> GetProductsByCategoryName(string name)
+        {
+            return productService.GetProductsByCategoryName(name);
+        }
+
         public void UpdateProductInfo(UpdateProduct product, string info, Guid id)
         {
             switch (info)

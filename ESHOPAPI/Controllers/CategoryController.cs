@@ -40,7 +40,8 @@ namespace ESHOPAPI.Controllers
         [HttpGet("{name}")]
         public IActionResult GetCategoryByName(string name)
         {
-            return Ok(categoryService.GetCategoryByName(name));
+            categoryService.GetCategoryByName(name);
+            return Ok();
         }
 
         [HttpPost("Update")]

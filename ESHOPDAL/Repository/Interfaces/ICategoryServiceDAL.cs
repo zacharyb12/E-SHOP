@@ -9,6 +9,8 @@ namespace ESHOPDAL.Repository.Interfaces
 
         IEnumerable<Category> GetCategories();
 
+        Category GetCategory(Guid id);
+
         Category GetCategoryByName(string name);
 
         void UpdateCategory(Category category);

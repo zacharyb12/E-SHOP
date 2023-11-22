@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ESHOPDomainModels.Models._11.EnumStatus;
+using System.ComponentModel.DataAnnotations;
 
 namespace ESHOPDomainModels.Models.User
 {
@@ -15,9 +16,7 @@ namespace ESHOPDomainModels.Models.User
         [EmailAddress]
         public string Email { get; set; }
 
-        public string Password { get; set; }
-
-        public string Status { get; set; }
+        public UserStatus Status { get; set; }
 
         [StringLength(255)]
         public string Address { get; set; }

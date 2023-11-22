@@ -59,6 +59,20 @@ namespace ESHOPDAL.Repository.Services
 
         }
 
+        public IEnumerable<Product> GetProductsByCategoryName(string name)
+        {
+            string sql = "SELECT Product.*, Category.Name AS CategoryName " +
+                 "FROM Product " +
+                 "JOIN Category ON Product.CategoryId = Category.Id " +
+                 "WHERE CategoryName = @name ";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("Name", name);
+
+            return connection.Query<Product>(sql , parameters);
+
+        }
+
         public Product GetById(Guid id)
         {
             string sql = "SELECT * FROM Product WHERE Id = @id";

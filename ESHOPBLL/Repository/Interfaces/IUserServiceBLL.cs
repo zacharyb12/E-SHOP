@@ -1,11 +1,10 @@
-﻿using ESHOPDomainModels.Models._01.User;
-using ESHOPDomainModels.Models.User;
+﻿using ESHOPDomainModels.Models.User;
 
 namespace ESHOPBLL.Repository.Interfaces
 {
     public interface IUserServiceBLL
     {
-        void CreateUser(CreateUser user);
+        //void CreateUser(CreateUser user);
 
         IEnumerable<User> GetUsers();
 
@@ -16,6 +15,6 @@ namespace ESHOPBLL.Repository.Interfaces
 
         void Register(string email, string password, string lastName, string firstName, string status, string address);
 
-        User Login(string email, string password);
+        string Login(string email, string password);
     }
 }

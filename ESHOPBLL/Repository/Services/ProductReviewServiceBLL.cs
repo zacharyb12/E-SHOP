@@ -50,5 +50,10 @@ namespace ESHOPBLL.Repository.Services
         {
             return productReviewService.GetProductReviewByRating(rating);
         }
+
+        public IEnumerable<ProductReview> GetProductReviewByProductId(Guid id)
+        {
+            return productReviewService.GetProductReviewByProductId(id);
+        }
     }
 }

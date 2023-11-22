@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ESHOPDomainModels.Models._11.EnumStatus;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace ESHOPDomainModels.Models.User
 
         public string Password { get; set; }
 
-        public string Status { get; set; }
+        public UserStatus Status { get; set; } = UserStatus.User;
 
         [StringLength(255)]
         public string Address { get; set; }

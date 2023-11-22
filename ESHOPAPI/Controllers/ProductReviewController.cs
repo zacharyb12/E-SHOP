@@ -41,6 +41,12 @@ namespace ESHOPAPI.Controllers
             return productReviewService.GetProductReviewByUserID(id);
         }
 
+        [HttpGet("IdProduct")]
+        public IEnumerable<ProductReview> GetProductReviewsByProduct(Guid id) 
+        {
+            return productReviewService.GetProductReviewByProductId(id);
+        }
+
         [HttpGet("rating")]
         public IEnumerable<ProductReview> GetProductReviewByRating(int rating)
         {

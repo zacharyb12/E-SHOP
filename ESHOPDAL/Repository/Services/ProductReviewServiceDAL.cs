@@ -53,6 +53,13 @@ namespace ESHOPBLL.Repository.Services
             return connection.QueryFirst<ProductReview>(sql);
         }
 
+        public IEnumerable<ProductReview> GetProductReviewByProductId(Guid id)
+        {
+            string sql = "SELECT * FROM ProductReview WHERE ProductId = @id";
+
+            return connection.Query<ProductReview>(sql);
+        }
+
         public IEnumerable<ProductReview> GetProductReviewByUserId(Guid id)
         {
             string sql = "SELECT * FROM ProductReview WHERE Id = @id";

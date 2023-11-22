@@ -39,5 +39,15 @@ namespace ESHOPDAL.Repository.Services
 
             connection.Execute(sql, parameters);
         }
+
+        public IEnumerable<FavoriteItem> GetFavoriteItemByUser(Guid id)
+        {
+            string sql = "SELECT * FROM FavoriteItem WHERE UserId = @id";
+
+                var parameters = new DynamicParameters();
+                parameters.Add("UserId", id);
+
+            return connection.Query<FavoriteItem>(sql, parameters);
+        }
     }
 }

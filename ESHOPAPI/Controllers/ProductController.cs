@@ -47,6 +47,12 @@ namespace ESHOPAPI.Controllers
             return productService.GetProductByName(name);
         }
 
+        [HttpGet("CategoryName")]
+        public IEnumerable<Product> GetProductsByCategoryName(string name)
+        {
+            return productService.GetProductsByCategoryName(name);
+        }
+
         [HttpPost("Id")]
         public IActionResult UpdateProductInfo(UpdateProduct product, string info , Guid id)
         {

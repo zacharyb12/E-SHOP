@@ -60,7 +60,6 @@ namespace ESHOPDAL.Repository.Services
 
             // Utilisez la réflexion pour obtenir la valeur de la propriété
             object propertyValue = typeof(CartItem).GetProperty(info)?.GetValue(cartItem);
-
             parameters.Add("@Value", propertyValue);
 
             connection.Execute(sql, parameters);

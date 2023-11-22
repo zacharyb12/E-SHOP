@@ -11,6 +11,8 @@ namespace ESHOPDAL.Repository.Interfaces
 
         Product GetByName(string name);
 
+        IEnumerable<Product> GetProductsByCategoryName(string name);
+
         IEnumerable<Product> GetProducts();
 
         void UpdateProductInfo(UpdateProduct product, string info, Guid id);

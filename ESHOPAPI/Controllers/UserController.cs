@@ -1,9 +1,6 @@
 ﻿using ESHOPBLL.Repository.Interfaces;
-using ESHOPDomainModels.Models._01.User;
 using ESHOPDomainModels.Models.User;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 
 namespace ESHOPAPI.Controllers
 {
@@ -18,17 +15,17 @@ namespace ESHOPAPI.Controllers
             this.userService = userService;
         }
 
-        [HttpPost]
-        public IActionResult  CreateUser(CreateUser user) 
-        {
-            if (!ModelState.IsValid) 
-            { 
-                return BadRequest(ModelState);
-            }
-            userService.CreateUser(user);
+        //[HttpPost]
+        //public IActionResult  CreateUser(CreateUser user) 
+        //{
+        //    if (!ModelState.IsValid) 
+        //    { 
+        //        return BadRequest(ModelState);
+        //    }
+        //    userService.CreateUser(user);
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
         [HttpGet]
         public IEnumerable<User> GetUsers() 
@@ -43,13 +40,9 @@ namespace ESHOPAPI.Controllers
         }
 
         [HttpPost("Login")]
-        public IActionResult Login(UserLogin user)
+        public string Login(UserLogin user)
         {
-            if (!ModelState.IsValid) 
-            {
-                return BadRequest();
-            }
-            return Ok(userService.Login(user.Email , user.Password));
+            return userService.Login(user.Email , user.Password);
         }
 
         [HttpPost("register")]
@@ -71,5 +64,6 @@ namespace ESHOPAPI.Controllers
             userService.UpdateUserInfo(user, info , id);
             return Ok();
         }
+
     }
 }

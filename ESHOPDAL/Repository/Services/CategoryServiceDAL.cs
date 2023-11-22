@@ -38,11 +38,16 @@ namespace ESHOPDAL.Repository.Services
         }
 
 
+        public Category GetCategory(Guid id)
+        {
+            return connection.QueryFirst<Category>(" SELECT * FROM Category WHERE Id = @id ");
+        } 
+
         public Category GetCategoryByName(string name)
         {
-
-            return connection.QueryFirst<Category>(" SELECT * FROM Category WHERE Name = @name ", new { name });
+            return connection.QueryFirst<Category>("SELECT * FROM Category WHERE Name = @name", new { name });
         }
+
 
         public void UpdateCategory(Category category)
         {

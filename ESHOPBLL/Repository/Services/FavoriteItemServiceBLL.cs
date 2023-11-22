@@ -11,21 +11,26 @@ namespace ESHOPBLL.Repository.Services
 {
     public class FavoriteItemServiceBLL : IFavoriteItemServiceBLL
     {
-        private IFavoriteItemServiceDAL FavoriteItemService;
+        private IFavoriteItemServiceDAL favoriteItemService;
 
         public FavoriteItemServiceBLL(IFavoriteItemServiceDAL favoriteItemService)
         {
-            FavoriteItemService = favoriteItemService;
+            this.favoriteItemService = favoriteItemService;
         }
 
         public void AddFavoriteItem(FavoriteItem favorite)
         {
-            FavoriteItemService.AddFavoriteItem(favorite);
+            favoriteItemService.AddFavoriteItem(favorite);
         }
 
         public void DeleteFavoriteItem(FavoriteItem favorite)
         {
-            FavoriteItemService.DeleteFavoriteItem(favorite);
+            favoriteItemService.DeleteFavoriteItem(favorite);
+        }
+
+        public IEnumerable<FavoriteItem> GetFavoriteItemByUser(Guid id)
+        {
+            return favoriteItemService.GetFavoriteItemByUser(id);
         }
     }
 }
