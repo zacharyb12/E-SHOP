@@ -19,15 +19,18 @@ namespace ESHOPBLL.Repository.Services
 
         //}
 
+
         public IEnumerable<User> GetUsers() 
         { 
            return  userService.GetUsers();
         }
 
+
         public User GetUserById(Guid id) 
         {
             return userService.GetUsersById(id);
         }
+
 
         public void UpdateUserInfo(User user, string info , Guid id)
         {
@@ -57,34 +60,33 @@ namespace ESHOPBLL.Repository.Services
         }
 
 
-
-        public void Register(string email, string password, string lastName, string firstName, string status, string address)
+        public void Register(string email, string password, string lastName, string firstName, Enum status, string address)
         {
-
-
             var user = new CreateUser
             {
                 LastName = lastName,
                 FirstName = firstName,
                 Email = email,
-                Status = status,
+                Status = (ESHOPDomainModels.Models._11.EnumStatus.UserStatus)status,
                 Address = address,
-                Password = password  // Utiliser le mot de passe haché
+                Password = password  
             };
 
             userService.Register(user);
         }
+
 
         private bool CheckPassword(string email, string Password)
         {
             return userService.CheckPassword(email, Password);
         }
 
-        public string Login(string email , string password) 
+
+        public string Login(string email, string password)
         {
             if (CheckPassword(email , password)) 
             {
-                return userService.Login(email);
+                return userService.Login(email,password);
             }
             throw new InvalidOperationException("Wrong Password");
         }

@@ -10,7 +10,7 @@ namespace ESHOPAPI.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private IProductServiceBLL productService;
+        private readonly IProductServiceBLL productService;
 
         public ProductController(IProductServiceBLL productService)
         {
@@ -42,7 +42,7 @@ namespace ESHOPAPI.Controllers
         }
 
         [HttpGet("name")]
-        public Product GetProductById(string name)
+        public Product GetProductByName(string name)
         {
             return productService.GetProductByName(name);
         }
@@ -53,7 +53,7 @@ namespace ESHOPAPI.Controllers
             return productService.GetProductsByCategoryName(name);
         }
 
-        [HttpPost("Id")]
+        [HttpPost("info")]
         public IActionResult UpdateProductInfo(UpdateProduct product, string info , Guid id)
         {
             if(!ModelState.IsValid) 
@@ -64,5 +64,17 @@ namespace ESHOPAPI.Controllers
             productService.UpdateProductInfo(product, info, id);
             return Ok(product);
         }
+
+        [HttpPut("id")]
+        public IActionResult UpdateProduct(UpdateProduct product,  Guid id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            productService.UpdateProduct(product, id);
+            return Ok(product);
+        }
+
     }
 }

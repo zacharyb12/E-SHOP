@@ -20,10 +20,9 @@ namespace ESHOPBLL.Repository.Services
             this.connection = connection;
         }
 
-        public void CreateProductReview(ProductReviewDate product)
+        // create product review - user
+        public void CreateProductReview(ProductReview product)
         {
-
-
             string sql = " INSERT INTO ProductReview (ProductId , UserId , Rating , ReviewText , ReviewDate ) VALUES ( @ProductId , @UserId , @Rating , @ReviewText , @ReviewDate)";
 
             product.ReviewDate = DateTime.Today;
@@ -36,9 +35,9 @@ namespace ESHOPBLL.Repository.Services
             parameters.Add("ReviewDate", product.ReviewDate );
 
             connection.Execute(sql, parameters);
-
         }
 
+        //get all product review - user
         public IEnumerable<ProductReview> GetProductReviews()
         {
             string sql = "SELECT * FROM ProductReview";
@@ -46,6 +45,7 @@ namespace ESHOPBLL.Repository.Services
             return connection.Query<ProductReview>(sql);
         }
 
+        //get product review by id - admin
         public ProductReview GetProductReviewById(Guid id)
         {
             string sql = "SELECT * FROM ProductReview WHERE Id = @id";
@@ -53,6 +53,7 @@ namespace ESHOPBLL.Repository.Services
             return connection.QueryFirst<ProductReview>(sql);
         }
 
+        //get product review by product id - user
         public IEnumerable<ProductReview> GetProductReviewByProductId(Guid id)
         {
             string sql = "SELECT * FROM ProductReview WHERE ProductId = @id";
@@ -60,6 +61,7 @@ namespace ESHOPBLL.Repository.Services
             return connection.Query<ProductReview>(sql);
         }
 
+        //get product review by user id - user
         public IEnumerable<ProductReview> GetProductReviewByUserId(Guid id)
         {
             string sql = "SELECT * FROM ProductReview WHERE Id = @id";
@@ -67,11 +69,13 @@ namespace ESHOPBLL.Repository.Services
             return connection.Query<ProductReview>(sql);
         }
 
+        //get product  review by rating - user
         public IEnumerable<ProductReview> GetProductReviewByRating(int rating)
         {
             string sql = "SELECT * FROM ProductReview WHERE Rating = @rating";
 
             return connection.Query<ProductReview>(sql);
         }
+
     }
 }

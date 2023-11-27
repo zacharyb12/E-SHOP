@@ -37,23 +37,42 @@ namespace ESHOPAPI.Controllers
             return categoryService.GetCategory();
         }
 
-        [HttpGet("{name}")]
-        public IActionResult GetCategoryByName(string name)
+        [HttpGet("id")]
+        public Category GetCategoryById(Guid id)
         {
-            categoryService.GetCategoryByName(name);
-            return Ok();
+            return categoryService.GetCategoryById(id);
+
         }
 
-        [HttpPost("Update")]
-        public IActionResult UpdateCategory(Category category) 
+        [HttpGet("name")]
+        public Category GetCategoryByName(string name)
+        {
+            return categoryService.GetCategoryByName(name);
+            
+        }
+
+        [HttpPost("{id}")]
+        public IActionResult UpdateCategory(Category category , Guid id) 
         {
             if (!ModelState.IsValid) 
             {
                 return BadRequest(ModelState);
             }
-            categoryService.UpdateCategory(category);
+            categoryService.UpdateCategory(category, id );
 
             return Ok();
         }
+
+        [HttpDelete("id")]
+        public IActionResult DeleteCategory(Guid id) 
+        {
+            if(!ModelState.IsValid) 
+            {
+                return BadRequest(ModelState);
+            }
+            categoryService.DeleteCategory(id);
+            return Ok();
+        }
+
     }
 }

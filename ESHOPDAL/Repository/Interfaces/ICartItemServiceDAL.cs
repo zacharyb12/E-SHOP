@@ -4,6 +4,7 @@ namespace ESHOPDAL.Repository.Interfaces
 {
     public interface ICartItemServiceDAL
     {
+
         void CreateCartItem(CreateCartItem cartItem);
 
         void DeleteCartItem(Guid id);

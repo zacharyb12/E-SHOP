@@ -24,24 +24,29 @@ namespace ESHOPBLL.Repository.Services
             orderService.CreateOrder(order);
         }
 
+
         public void UpdateOrder(Order order)
         {
             orderService.UpdateOrder(order);
         }
+
 
         public IEnumerable<Order> GetAllOrders() 
         {
             return orderService.GetOrders();
         }
 
+
         public IEnumerable<Order> GetOrderById(Guid id)
         {
             return orderService.GetOrderById(id);
         }
 
+
         public IEnumerable<Order> GetOrderByUserId(Guid id)
         {
             return orderService.GetOrderByUserId(id);
         }
+
     }
 }

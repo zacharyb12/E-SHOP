@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using ESHOPDAL.Repository.Interfaces;
 using ESHOPDomainModels.Models;
+using ESHOPDomainModels.Models._03.Product;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -19,6 +20,7 @@ namespace ESHOPDAL.Repository.Services
             this.connection = connection;
         }
 
+        //add item to favorite - user
         public void AddFavoriteItem(FavoriteItem favorite)
         {
             string sql = "INSERT INTO FavoriteItem (UserId , ProductId ) VALUES ( @UserId , @ProductId )";
@@ -30,6 +32,7 @@ namespace ESHOPDAL.Repository.Services
             connection.Execute(sql, parameters);
         }
 
+        // delete favorite item - user
         public void DeleteFavoriteItem(FavoriteItem favorite)
         {
             string sql = "DELETE FROM FavoriteItem WHERE Id = @Id";
@@ -40,14 +43,13 @@ namespace ESHOPDAL.Repository.Services
             connection.Execute(sql, parameters);
         }
 
+        //get list of favorite item - user
         public IEnumerable<FavoriteItem> GetFavoriteItemByUser(Guid id)
         {
             string sql = "SELECT * FROM FavoriteItem WHERE UserId = @id";
 
-                var parameters = new DynamicParameters();
-                parameters.Add("UserId", id);
-
-            return connection.Query<FavoriteItem>(sql, parameters);
+            return connection.Query<FavoriteItem>(sql, new { id });
         }
+
     }
 }

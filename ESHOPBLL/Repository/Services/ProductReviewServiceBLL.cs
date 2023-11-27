@@ -11,7 +11,7 @@ namespace ESHOPBLL.Repository.Services
 {
     public class ProductReviewServiceBLL : IProductReviewServiceBLL
     {
-        private IProductReviewServiceDAL productReviewService;
+        private readonly IProductReviewServiceDAL productReviewService;
 
         public ProductReviewServiceBLL(IProductReviewServiceDAL productReviewService)
         {
@@ -20,7 +20,7 @@ namespace ESHOPBLL.Repository.Services
 
         public void CreateProductReview(CreateProductReview product)
         {
-            ProductReviewDate productReviewWithDate = new ProductReviewDate()
+            ProductReview productReview = new ProductReview()
             {
                 ReviewDate = new DateTime(),
                 ProductId = product.ProductId,
@@ -28,32 +28,38 @@ namespace ESHOPBLL.Repository.Services
                 Rating = product.Rating,
                 ReviewText = product.ReviewText,
             };
-            productReviewService.CreateProductReview(productReviewWithDate);
+            productReviewService.CreateProductReview(productReview);
         }
+
 
         public IEnumerable<ProductReview> GetProductReviews()
         {
             return productReviewService.GetProductReviews();
         }
 
+
         public ProductReview GetProductReviewById(Guid id)
         {
             return productReviewService.GetProductReviewById(id);
         }
+
 
         public IEnumerable<ProductReview> GetProductReviewByUserID(Guid id)
         {
             return productReviewService.GetProductReviewByUserId(id);
         }
 
+
         public IEnumerable<ProductReview> GetProductReviewByRating(int rating)
         {
             return productReviewService.GetProductReviewByRating(rating);
         }
 
+
         public IEnumerable<ProductReview> GetProductReviewByProductId(Guid id)
         {
             return productReviewService.GetProductReviewByProductId(id);
         }
+
     }
 }

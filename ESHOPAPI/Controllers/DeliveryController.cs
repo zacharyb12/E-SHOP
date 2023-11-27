@@ -9,7 +9,7 @@ namespace ESHOPAPI.Controllers
     [ApiController]
     public class DeliveryController : ControllerBase
     {
-        public IDeliveryServiceBLL deliveryService;
+        private readonly IDeliveryServiceBLL deliveryService;
 
         public DeliveryController(IDeliveryServiceBLL deliveryService)
         {

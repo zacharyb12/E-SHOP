@@ -5,6 +5,7 @@ namespace ESHOPDAL.Repository.Interfaces
 {
     public interface IOrderItemServiceDAL
     {
+
         void CreateOrderItem(CreateOrderItem orderItem);
 
         IEnumerable<OrderItem> GetAllOrdersUserId(Guid id);
@@ -12,5 +13,6 @@ namespace ESHOPDAL.Repository.Interfaces
         IEnumerable<OrderItem> GetAllOrders();
 
         //void DeleteOrderITem(Guid id);
+
     }
 }

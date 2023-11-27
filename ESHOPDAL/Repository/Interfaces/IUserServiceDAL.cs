@@ -4,6 +4,7 @@ namespace ESHOPDAL.Repository.Interfaces
 {
     public interface IUserServiceDAL
     {
+
         //void CreateUser(CreateUser user);
 
         IEnumerable<User> GetUsers();
@@ -18,5 +19,6 @@ namespace ESHOPDAL.Repository.Interfaces
         bool CheckPassword(string email, string Password);
 
         string Login(string email, string password);
+
     }
 }

@@ -5,6 +5,7 @@ namespace ESHOPDAL.Repository.Interfaces
 {
     public interface IOrderServiceDAL
     {
+
         void CreateOrder(CreateOrder order);
 
         void UpdateOrder(Order order);
@@ -14,5 +15,6 @@ namespace ESHOPDAL.Repository.Interfaces
         IEnumerable<Order> GetOrderByUserId(Guid id);
 
         IEnumerable<Order> GetOrders();
+
     }
 }

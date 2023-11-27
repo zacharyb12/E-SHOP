@@ -5,6 +5,7 @@ namespace ESHOPBLL.Repository.Interfaces
 {
     public interface IOrderItemServiceBLL
     {
+
         void CreateOrderITem(CreateOrderItem orderItem);
 
         IEnumerable<OrderItem> GetAllOrdersUserId(Guid id);
@@ -12,5 +13,6 @@ namespace ESHOPBLL.Repository.Interfaces
         IEnumerable<OrderItem> GetAllOrders();
 
         void DeleteOrderItem();
+
     }
 }

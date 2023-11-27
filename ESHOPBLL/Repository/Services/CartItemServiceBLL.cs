@@ -30,19 +30,23 @@ namespace ESHOPBLL.Repository.Services
             cartItemService.CreateCartItem(cartItem);
         }
 
+
         public void DeleteCartItem(Guid id)
         {
             cartItemService.DeleteCartItem(id);
         }
+
 
         public IEnumerable<CartItem> GetCartItems(Guid id)
         {
             return cartItemService.GetCartItems(id);
         }
 
+
         public void UpdateCartItemInfo(CartItem cartItem, string info, Guid id)
         {
             cartItemService.UpdateCartItemInfo(cartItem, info, id);
         }
+
     }
 }

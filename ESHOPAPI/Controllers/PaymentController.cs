@@ -1,7 +1,6 @@
 ﻿using ESHOPBLL.Repository.Interfaces;
 using ESHOPDomainModels.Models;
 using ESHOPDomainModels.Models._09.Payment;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ESHOPAPI.Controllers
@@ -50,5 +49,6 @@ namespace ESHOPAPI.Controllers
         {
             paymentService.UpdatePayment(id);
         }
+
     }
 }

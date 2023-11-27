@@ -6,8 +6,6 @@
 
         public Guid UserId { get; set; }
 
-        public Guid OrderItemId { get; set; }
-
         public string Status { get; set; }
 
         public DateTime OrderDate { get; set; }

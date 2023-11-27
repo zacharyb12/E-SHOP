@@ -18,26 +18,9 @@ namespace ESHOPDAL.Repository.Services
             this.connection = connection;
         }
 
-        //METHODES
-        //public void CreateUser(CreateUser user)
-        //{
-        //    string sql = "INSERT INTO Users (LastName, FirstName, Email, Password, Status, Address) VALUES (@LastName, @FirstName, @Email, @Password, @Status, @Address)";
-
-        //    string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
-        //    byte[] passwordBytes = Encoding.UTF8.GetBytes(hashedPassword);
-
-        //    var parameters = new DynamicParameters();
-        //    parameters.Add("@LastName", user.LastName);
-        //    parameters.Add("@FirstName", user.FirstName);
-        //    parameters.Add("@Email", user.Email);
-        //    parameters.Add("@Password", passwordBytes);
-        //    parameters.Add("@Status", user.Status);
-        //    parameters.Add("@Address", user.Address);
-
-        //    connection.Execute(sql, parameters);
-        //}
 
 
+        // get all users - admin
         public IEnumerable<User> GetUsers() 
         {
             string sql = " SELECT * FROM Users";
@@ -45,15 +28,16 @@ namespace ESHOPDAL.Repository.Services
             return connection.Query<User>(sql);
         }
 
-
+        // get user by id - admin
         public User GetUsersById(Guid id)
         {
             return connection.QueryFirst<User>(" SELECT * FROM Users WHERE Id = @id ");
         }
 
-
+        // update user only info  - user
         public void UpdateUserInfo(User user, string info, Guid id)
         {
+            //list of properties
             var validColumnNames = new List<string> { "LastName", "FirstName", "Email", "Password", "Address" };
 
             if (!validColumnNames.Contains(info))
@@ -74,7 +58,7 @@ namespace ESHOPDAL.Repository.Services
             connection.ExecuteScalar(sql, parameters);
         }
 
-
+        // adaptation of sql request for update user 
         public string GetUserInfoValue( string info)
         {
             switch (info)
@@ -97,7 +81,7 @@ namespace ESHOPDAL.Repository.Services
 
         ////////////////Connection
 
-
+        // create new user - user
         public void Register(CreateUser user)
         {
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
@@ -118,7 +102,7 @@ namespace ESHOPDAL.Repository.Services
             connection.Execute(sql, param);
         }
 
-
+        //connection verification of password
         public bool CheckPassword(string email, string password)
         {
             // Récupérer le mot de passe haché depuis la base de données
@@ -128,6 +112,7 @@ namespace ESHOPDAL.Repository.Services
             return BCrypt.Net.BCrypt.Verify(password, storedPassword);
         }
 
+        //connection get info email password - user
         public string Login(string email , string password)
         {
             string sql = "SELECT * FROM Users WHERE Email = @email";
@@ -138,9 +123,9 @@ namespace ESHOPDAL.Repository.Services
             {
                 if(CheckPassword(email, password)) 
                 {
-                // Génération du token
-                    var token = GenerateToken(user.Email,user.Status);
-                    return token;
+                    // Génération du token
+                    /* var token = GenerateToken(user.Email,user.Status)
+                    return token;;*/
                 }
                 return ("Error with password");
             }
@@ -148,26 +133,46 @@ namespace ESHOPDAL.Repository.Services
             return null;
         }
 
-        private string GenerateToken(string userEmail , string status)
-        {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("e3bf8aa1-4c1e-475f-a538-8ed52fd21916"));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+        //  non used 
 
-            var claims = new List<Claim>
-            { new Claim($"{userEmail}", status) };
+        //private string GenerateToken(string userEmail , string status)
+        //{
+        //    var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("e3bf8aa1-4c1e-475f-a538-8ed52fd21916"));
+        //    var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            var token = new JwtSecurityToken
-            (
-                issuer.configuration["Jwt:Issuer"],
-                audience: "https://localhost:7110",
-                claims: claims,
-                expires: DateTime.Now.AddHours(1), // Durée de validité du token
-                signingCredentials: credentials
-            );
+        //    var claims = new List<Claim>
+        //    { new Claim($"{userEmail}", status) };
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            return tokenHandler.WriteToken(token);
-        }
+        //    var token = new JwtSecurityToken
+        //    (
+        //        issuer.configuration["Jwt:Issuer"],
+        //        audience: "https://localhost:7110",
+        //        claims: claims,
+        //        expires: DateTime.Now.AddHours(1), // Durée de validité du token
+        //        signingCredentials: credentials
+        //    );
 
+        //    var tokenHandler = new JwtSecurityTokenHandler();
+        //    return tokenHandler.WriteToken(token);
+        //}
+
+        //METHODES non used
+        //public void CreateUser(CreateUser user)
+        //{
+        //    string sql = "INSERT INTO Users (LastName, FirstName, Email, Password, Status, Address) VALUES (@LastName, @FirstName, @Email, @Password, @Status, @Address)";
+
+        //    string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
+        //    byte[] passwordBytes = Encoding.UTF8.GetBytes(hashedPassword);
+
+        //    var parameters = new DynamicParameters();
+        //    parameters.Add("@LastName", user.LastName);
+        //    parameters.Add("@FirstName", user.FirstName);
+        //    parameters.Add("@Email", user.Email);
+        //    parameters.Add("@Password", passwordBytes);
+        //    parameters.Add("@Status", user.Status);
+        //    parameters.Add("@Address", user.Address);
+
+        //    connection.Execute(sql, parameters);
+        //} 
     }
 }

@@ -2,6 +2,7 @@
 using ESHOPDAL.Repository.Interfaces;
 using ESHOPDomainModels.Models;
 using ESHOPDomainModels.Models._07.OrderITem;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -20,7 +21,8 @@ namespace ESHOPDAL.Repository.Services
             this.connection = connection;
         }
 
-        public void CreateOrderItem(CreateOrderItem orderItem)
+        //create  orderItem for order - user
+         public void CreateOrderItem(CreateOrderItem orderItem)
         {
             string sql = "INSERT INTO OrderItem (OrderID , ProductId , Quantity , ItemPrice) VALUES (@OrderID , @ProductId , @Quantity , @ItemPrice)";
 
@@ -33,6 +35,7 @@ namespace ESHOPDAL.Repository.Services
             connection.Execute(sql, parameters);
         }
 
+        // get all order by user id - user
         public IEnumerable<OrderItem> GetAllOrdersUserId(Guid id) 
         {
             string sql = "SELECT * FROM OrderITem WHERE UserId = @id";
@@ -40,6 +43,7 @@ namespace ESHOPDAL.Repository.Services
             return connection.Query<OrderItem>(sql);
         }
 
+        //get all order - admin
         public IEnumerable<OrderItem> GetAllOrders()
         {
             string sql = "SELECT * FROM OrderITem";
@@ -47,6 +51,7 @@ namespace ESHOPDAL.Repository.Services
             return connection.Query<OrderItem>(sql);
         }
 
+        //delete order for delivery 
         public void DeleteOrderITem(Guid id)
         {
 

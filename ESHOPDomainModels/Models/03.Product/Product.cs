@@ -23,5 +23,7 @@ namespace ESHOPDomainModels.Models._03.Product
         public int Rating { get; set; }
 
         public string CategoryName { get; set; }
+
+        public Guid CategoryId { get; set; }
     }
 }

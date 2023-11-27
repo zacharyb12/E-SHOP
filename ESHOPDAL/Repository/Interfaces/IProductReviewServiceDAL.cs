@@ -5,7 +5,8 @@ namespace ESHOPBLL.Repository.Interfaces
 {
     public interface IProductReviewServiceDAL
     {
-        void CreateProductReview(ProductReviewDate product);
+
+        void CreateProductReview(ProductReview product);
 
         ProductReview GetProductReviewById(Guid id);
 
@@ -16,5 +17,6 @@ namespace ESHOPBLL.Repository.Interfaces
         public IEnumerable<ProductReview> GetProductReviewByProductId(Guid id);
 
         IEnumerable<ProductReview> GetProductReviews();
+
     }
 }

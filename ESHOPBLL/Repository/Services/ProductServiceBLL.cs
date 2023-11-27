@@ -13,10 +13,12 @@ namespace ESHOPBLL.Repository.Services
     public class ProductServiceBLL : IProductServiceBLL
     {
         private IProductServiceDAL productService;
+        private ICategoryServiceDAL categoryService;
 
-        public ProductServiceBLL(IProductServiceDAL productService)
+        public ProductServiceBLL(IProductServiceDAL productService, ICategoryServiceDAL categoryService)
         {
             this.productService = productService;
+            this.categoryService = categoryService;
         }
 
         public void CreateProduct(CreateProduct product)
@@ -29,20 +31,26 @@ namespace ESHOPBLL.Repository.Services
             return productService.GetProducts();
         }
 
+
         public Product GetProductById(Guid id)
         {
             return productService.GetById(id);
         }
+
 
         public Product GetProductByName(string name)
         {
             return productService.GetByName(name);
         }
 
+
         public  IEnumerable<Product> GetProductsByCategoryName(string name)
         {
-            return productService.GetProductsByCategoryName(name);
+            Category category = this.categoryService.GetCategoryByName(name);
+
+            return productService.GetProductsByCategory(category.Id);
         }
+
 
         public void UpdateProductInfo(UpdateProduct product, string info, Guid id)
         {
@@ -72,6 +80,14 @@ namespace ESHOPBLL.Repository.Services
             }
                     productService.UpdateProductInfo(product, info, id);
         }
+
+
+        public void UpdateProduct(UpdateProduct product, Guid id)
+        {
+            
+            productService.UpdateProduct(product, id);
+        }
+
 
     }
 }

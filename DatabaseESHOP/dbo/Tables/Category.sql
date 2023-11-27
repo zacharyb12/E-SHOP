@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Category] (
+    [Id]   UNIQUEIDENTIFIER DEFAULT (newid()) NOT NULL,
+    [Name] NVARCHAR (50)    NOT NULL,
+    CONSTRAINT [PK_Category] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+

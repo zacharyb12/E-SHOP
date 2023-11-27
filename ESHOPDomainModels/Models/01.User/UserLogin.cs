@@ -9,6 +9,8 @@ namespace ESHOPDomainModels.Models.User
 {
     public class UserLogin
     {
+        //public Guid Id { get; set; }
+
         [Required]
         [EmailAddress]
         public string Email { get; set; }

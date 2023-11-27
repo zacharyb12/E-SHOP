@@ -1,4 +1,3 @@
-using ESHOPAPI.AuthDbContext;
 using ESHOPBLL.Repository.Interfaces;
 using ESHOPBLL.Repository.Services;
 using ESHOPDAL.Repository.Interfaces;
@@ -11,14 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-builder.Services.AddTransient(sp => new SqlConnection(
-    builder.Configuration.GetConnectionString("ConnectionString")
-    ));
-
 
 
 builder.Services.AddScoped<ICartItemServiceBLL, CartItemServiceBLL>();
@@ -42,15 +35,13 @@ builder.Services.AddScoped<IProductServiceBLL, ProductServiceBLL>();
 builder.Services.AddScoped<IUserServiceDAL, UserServiceDAL>();
 builder.Services.AddScoped<IUserServiceBLL, UserServiceBLL>();
 
+builder.Services.AddTransient(sp => new SqlConnection(
+    builder.Configuration.GetConnectionString("ConnectionString")
+    ));
+
 
 var app = builder.Build();
 
-app.UseCors(builder =>
-{
-    builder.AllowAnyOrigin()
-           .AllowAnyMethod()
-           .AllowAnyHeader();
-});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -59,6 +50,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app   .UseCors(o => o       
+         .AllowAnyOrigin()
+         .AllowAnyHeader()
+         .AllowAnyMethod()
+         );
 
 app.UseHttpsRedirection();
 

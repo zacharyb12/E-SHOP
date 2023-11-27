@@ -24,24 +24,29 @@ namespace ESHOPBLL.Repository.Services
             deliveryService.CreateDelivery(delivery);
         }
 
+
         public IEnumerable<Delivery> GetAllDeliveries()
         {
             return deliveryService.GetAllDelivery();
         }
+
 
         public IEnumerable<Delivery> GetAllDeliveriesByStatus(string status)
         {
             return deliveryService.GetAllDeliveryByStatus(status);
         }
 
+
         public IEnumerable<Delivery> GetAllDeliveriesByUserId(Guid id)
         {
             return deliveryService.GetAllDeliveryUserId(id);
         }
 
+
         public Delivery GetById(Guid id)
         {
             return deliveryService.GetById(id);
         }
+
     }
 }

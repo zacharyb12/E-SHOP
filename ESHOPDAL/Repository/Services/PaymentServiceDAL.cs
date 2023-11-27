@@ -21,6 +21,7 @@ namespace ESHOPDAL.Repository.Services
             this.connection = connection;
         }
 
+        // create payment for delivery - user
         public void CreatePayment(CreatePayment payment)
         {
             string sql = "INSERT INTO Payment (OrderId , UserId , Amount , PaymentDate , PaymentValidation ) VALUES ( @OrderId , @UserId , @Amount , @PaymentDate , @PaymentValidation) ";
@@ -35,6 +36,7 @@ namespace ESHOPDAL.Repository.Services
             connection.Execute(sql, parameters);
         }
 
+        // update payment value ( confirmation) - user
         public void UpdatePayment(Payment payment)
         {
             string sql = " UPDATES Payment SET Status = @payment.Status WHERE ID = @payment.Id ";
@@ -46,6 +48,7 @@ namespace ESHOPDAL.Repository.Services
             connection.Execute(sql, parameters);
         }
 
+        //get payment by id - admin
         public Payment GetPaymentById(Guid id)
         {
             string sql = "SELECT * FROM Payment WHERE ID = @id";
@@ -53,6 +56,7 @@ namespace ESHOPDAL.Repository.Services
             return connection.ExecuteScalar<Payment>(sql);
         }
 
+        //get payment by user id - user
         public Payment GetPaymentByUserId(Guid id)
         {
             string sql = "SELECT * FROM Payment WHERE UserId = @id";
@@ -60,11 +64,13 @@ namespace ESHOPDAL.Repository.Services
             return connection.ExecuteScalar<Payment>(sql);
         }
 
+        // get all payment - admin
         public IEnumerable<Payment> GetAllPayment()
         {
             string sql = "SELECT * FROM Payment";
 
             return connection.Query<Payment>(sql);
         }
+
     }
 }

@@ -5,14 +5,18 @@ namespace ESHOPDAL.Repository.Interfaces
 {
     public interface ICategoryServiceDAL
     {
+
         void CreateCategory(CreateCategory category);
 
         IEnumerable<Category> GetCategories();
 
-        Category GetCategory(Guid id);
+        Category GetCategoryById(Guid id);
 
         Category GetCategoryByName(string name);
 
-        void UpdateCategory(Category category);
+        void UpdateCategory(Category category , Guid id);
+
+        void DeleteCategory(Guid id);
+
     }
 }

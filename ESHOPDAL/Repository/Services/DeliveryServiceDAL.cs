@@ -20,6 +20,7 @@ namespace ESHOPDAL.Repository.Services
             this.connection = connection;
         }
 
+        //Create a delivery from cartItem - user
         public void CreateDelivery(CreateDelivery delivery)
         {
             string sql = "INSERT INTO Delivery  (UserId , OrderId , Status , DeliveryDate ) VALUES (@UserId , @OrderId , @Status , @DeliveryDate)";
@@ -33,6 +34,7 @@ namespace ESHOPDAL.Repository.Services
             connection.Execute(sql, parameters);
         }
 
+        //get all delivery - admin
         public IEnumerable<Delivery> GetAllDelivery()
         {
             string sql = " SELECT * FROM Delivery";
@@ -40,6 +42,7 @@ namespace ESHOPDAL.Repository.Services
             return connection.Query<Delivery>(sql);
         }
 
+        // get delivery by id - user
         public Delivery GetById(Guid id)
         {
             string sql = "Select * FROM Delivery WHERE Id = @id";
@@ -49,6 +52,7 @@ namespace ESHOPDAL.Repository.Services
             return connection.QueryFirst<Delivery>(sql, parameters);
         }
 
+        // get delivery by USer Id - user
         public IEnumerable<Delivery> GetAllDeliveryUserId(Guid id)
         {
             string sql = " SELECT * FROM Delivery WHERE UserId = @id";
@@ -58,6 +62,7 @@ namespace ESHOPDAL.Repository.Services
             return connection.Query<Delivery>(sql, parameters);
         }
 
+        //get all delivery by status - admin
         public IEnumerable<Delivery> GetAllDeliveryByStatus(string status)
         {
             string sql = " SELECT * FROM Delivery WHERE Status = @status";
@@ -66,7 +71,6 @@ namespace ESHOPDAL.Repository.Services
 
             return connection.Query<Delivery>(sql, parameters);
         }
-
 
     }
 }

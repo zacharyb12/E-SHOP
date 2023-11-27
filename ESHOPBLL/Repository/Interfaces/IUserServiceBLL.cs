@@ -4,6 +4,7 @@ namespace ESHOPBLL.Repository.Interfaces
 {
     public interface IUserServiceBLL
     {
+
         //void CreateUser(CreateUser user);
 
         IEnumerable<User> GetUsers();
@@ -12,9 +13,9 @@ namespace ESHOPBLL.Repository.Interfaces
 
         void UpdateUserInfo(User user, string info, Guid id);
 
-
-        void Register(string email, string password, string lastName, string firstName, string status, string address);
+        void Register(string email, string password, string lastName, string firstName, Enum status, string address);
 
         string Login(string email, string password);
+
     }
 }

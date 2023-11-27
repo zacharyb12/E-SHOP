@@ -11,6 +11,11 @@ namespace ESHOPAPI.Controllers
     {
         private readonly IFavoriteItemServiceBLL favoriteItemService;
 
+        public FavoriteItemController(IFavoriteItemServiceBLL favoriteItemService)
+        {
+            this.favoriteItemService = favoriteItemService;
+        }
+
         [HttpPost]
         public IActionResult AddFavoriteITem(FavoriteItem favorite)
         {

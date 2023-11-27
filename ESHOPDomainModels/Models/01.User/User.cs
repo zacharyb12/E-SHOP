@@ -13,21 +13,25 @@ namespace ESHOPDomainModels.Models.User
         [StringLength(50)]
         public string FirstName { get; set; }
 
+        [Required]
         [EmailAddress]
         public string Email { get; set; }
 
-        public UserStatus Status { get; set; }
+        [Required]
+        public string Password { get; set; }
+
+        public string Status { get; set; }
 
         [StringLength(255)]
         public string Address { get; set; }
 
-        //public virtual ICollection<CartItem> CartItems { get; set; }
+        public virtual ICollection<Guid> CartItems { get; set; }
 
-        //public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Guid> Orders { get; set; }
 
-        //public virtual ICollection<Payment> Payments { get; set; }
+        public virtual ICollection<Guid> Payments { get; set; }
 
-        //public virtual ICollection<ProductReview> ProductsReview { get; set; }
+        public virtual ICollection<Guid> ProductsReview { get; set; }
 
     }
 }

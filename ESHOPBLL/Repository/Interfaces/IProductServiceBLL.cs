@@ -5,6 +5,7 @@ namespace ESHOPBLL.Repository.Interfaces
 {
     public interface IProductServiceBLL
     {
+
         void CreateProduct(CreateProduct product);
 
         Product GetProductById(Guid id);
@@ -16,5 +17,8 @@ namespace ESHOPBLL.Repository.Interfaces
         IEnumerable<Product> GetProducts();
 
         void UpdateProductInfo(UpdateProduct product, string info, Guid id);
+
+        void UpdateProduct(UpdateProduct product, Guid id);
+
     }
 }

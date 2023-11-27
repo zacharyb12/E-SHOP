@@ -21,20 +21,21 @@ namespace ESHOPDAL.Repository.Services
             this.connection = connection;
         }
 
+        //create order - user
         public void CreateOrder(CreateOrder order)
         {
-            string sql = "INSERT INTO Order (UserId , OrderITemId , Status , OrderDate , TotalPrice) VALUES (@UserId , @OrderITemId , @Status , @OrderDate , @TotalPrice)";
+            string sql = "INSERT INTO Order (UserId , Status , OrderDate , TotalPrice) VALUES (@UserId , @Status , @OrderDate , @TotalPrice)";
 
             var parameters = new DynamicParameters();
             parameters.Add("UserId", order.UserId);
-            parameters.Add("OrderITemId", order.OrderItemId);
             parameters.Add("Status", order.Status);
             parameters.Add("OrderDate", order.OrderDate);
             parameters.Add("TotalPrice", order.TotalPrice);
 
-            connection.Execute(sql, parameters);
+            connection.Query(sql, parameters);
         }
 
+        //update order 
         public void UpdateOrder(Order order)
         {
             string sql = "UPDATE Order SET Status = @status WHERE Id = @Id";
@@ -46,6 +47,7 @@ namespace ESHOPDAL.Repository.Services
             connection.Execute(sql, parameters);
         }
 
+        // get order by id - user
         public IEnumerable<Order> GetOrderById(Guid id) 
         {
             string sql = "SELECT * FROM Order WHERE Id = @id";
@@ -54,6 +56,7 @@ namespace ESHOPDAL.Repository.Services
 
         }
 
+        //get order by user id -  user
         public IEnumerable<Order> GetOrderByUserId(Guid id)
         {
             string sql = "SELECT * FROM Order WHERE UserId = @id";
@@ -62,10 +65,12 @@ namespace ESHOPDAL.Repository.Services
 
         }
 
+        // get all order - admin
         public IEnumerable<Order> GetOrders() 
         {
             string sql = " SELECT * FROM [Order] ";
             return connection.Query<Order>(sql);
         }
+
     }
 }

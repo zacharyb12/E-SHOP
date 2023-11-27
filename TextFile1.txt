@@ -1,0 +1,72 @@
+Category :
+
+curl -X 'GET' \
+  'https://localhost:7110/api/Category' \
+  {
+    "id": "f92d5020-bb10-4fc5-9bcf-6d82bfe078fc",
+    "name": "shoes"
+  },
+  {
+    "id": "3535cd7e-efb1-47e7-bf14-bde0d171b4af",
+    "name": "jacket"
+  }
+
+  Product : 
+
+  curl -X 'GET' \
+  'https://localhost:7110/api/Product' \
+    {
+    "id": "52463c7d-e894-47db-89ae-18c14d047392",
+    "name": "string",
+    "price": 0,
+    "imagePath": "string",
+    "description": "string",
+    "stockQuantity": 0,
+    "rating": 0,
+    "categoryName": "shoes"
+  },
+  {
+    "id": "9e65adbd-a047-4006-9774-24c67fe7aa69",
+    "name": "string",
+    "price": 0,
+    "imagePath": "string",
+    "description": "string",
+    "stockQuantity": 0,
+    "rating": 0,
+    "categoryName": "shoes"
+  }
+
+  ProductReview : 
+
+  curl -X 'GET' \
+  'https://localhost:7110/api/ProductReview' \
+    {
+    "id": "be21f30e-8fad-4943-994e-6a673a0c9404",
+    "productId": "52463c7d-e894-47db-89ae-18c14d047392",
+    "userId": "2e41605e-e3c8-4989-8963-f41f46362eac",
+    "rating": 5,
+    "reviewText": "string dfsgdsfgsdfg dfsgsdfgsdfgsdf hfhdgjhejfdg",
+    "reviewDate": "2023-11-10T00:00:00"
+  }
+
+  User : 
+
+  curl -X 'GET' \
+  'https://localhost:7110/api/User' \
+
+    {
+    "id": "2e41605e-e3c8-4989-8963-f41f46362eac",
+    "lastName": "John",
+    "firstName": "Doe",
+    "email": "user@example.com",
+    "status": "string",
+    "address": "string"
+  }
+
+  FavoriteItem : 
+
+    {
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "productId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  }

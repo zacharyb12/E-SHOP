@@ -5,6 +5,7 @@ namespace ESHOPDAL.Repository.Interfaces
 {
     public interface IPaymentServiceDAL
     {
+
         void CreatePayment(CreatePayment payment);
 
         IEnumerable<Payment> GetAllPayment();
@@ -14,5 +15,6 @@ namespace ESHOPDAL.Repository.Interfaces
         Payment GetPaymentByUserId(Guid id);
 
         void UpdatePayment(Payment payment);
+
     }
 }

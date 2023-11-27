@@ -5,10 +5,16 @@ namespace ESHOPDAL.Repository.Interfaces
 {
     public interface IDeliveryServiceDAL
     {
+
         void CreateDelivery(CreateDelivery delivery);
+
         IEnumerable<Delivery> GetAllDelivery();
+
         IEnumerable<Delivery> GetAllDeliveryByStatus(string status);
+
         IEnumerable<Delivery> GetAllDeliveryUserId(Guid id);
+
         Delivery GetById(Guid id);
+
     }
 }

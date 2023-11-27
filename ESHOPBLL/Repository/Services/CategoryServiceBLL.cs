@@ -7,6 +7,7 @@ namespace ESHOPBLL.Repository.Services
 {
     public class CategoryServiceBLL : ICategoryServiceBLL
     {
+
         public ICategoryServiceDAL categoryService;
 
         public CategoryServiceBLL(ICategoryServiceDAL categoryService)
@@ -19,19 +20,34 @@ namespace ESHOPBLL.Repository.Services
             categoryService.CreateCategory(name);
         }
 
+
         public IEnumerable<Category> GetCategory()
         {
             return categoryService.GetCategories();
         }
+
 
         public Category GetCategoryByName(string name)
         {
            return categoryService.GetCategoryByName(name);   
         }
 
-        public void UpdateCategory(Category category)
+
+        public Category GetCategoryById(Guid id)
         {
-            categoryService.UpdateCategory(category);
+            return categoryService.GetCategoryById(id);
         }
+
+
+        public void UpdateCategory(Category category, Guid id)
+        {
+            categoryService.UpdateCategory(category , id);
+        }
+
+        public void DeleteCategory(Guid id) 
+        {
+            categoryService.DeleteCategory(id);
+        }
+
     }
 }

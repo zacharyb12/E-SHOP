@@ -24,20 +24,24 @@ namespace ESHOPBLL.Repository.Services
             paymentService.CreatePayment(payment);
         }
 
+
         public IEnumerable<Payment> GetAllPayment()
         {
             return paymentService.GetAllPayment();
         }
+
 
         public Payment GetPaymentById(Guid id)
         {
             return paymentService.GetPaymentById(id);
         }
 
+
         public Payment GetPaymentByUserId(Guid id)
         {
             return paymentService.GetPaymentByUserId(id);
         }
+
 
         public void UpdatePayment(Guid id)
         {
@@ -48,5 +52,6 @@ namespace ESHOPBLL.Repository.Services
             Payment payment  = GetPaymentById(id);
             paymentService.UpdatePayment(payment);
         }
+
     }
 }

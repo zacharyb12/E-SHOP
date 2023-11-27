@@ -19,6 +19,7 @@ namespace ESHOPDAL.Repository.Services
             this.connection = connection;
         }
 
+        //creation cartItem for user  - user
         public void CreateCartItem(CreateCartItem cartItem)
         {
             string sql = "INSERT INTO CartItem (UserId, ProductId, Quantity, ItemPrice) VALUES (@UserId, @ProductId, @Quantity, @ItemPrice)";
@@ -32,6 +33,7 @@ namespace ESHOPDAL.Repository.Services
             connection.Execute(sql, parameters);
         }
 
+        //get all cart item - user
         public IEnumerable<CartItem> GetCartItems(Guid id)
         {
             string sql = "SELECT * FROM CartItem WHERE UserId = @UserId";
@@ -42,7 +44,7 @@ namespace ESHOPDAL.Repository.Services
             return connection.Query<CartItem>(sql, parameters);
         }
 
-
+        //change cart item if buy item - admin
         public void DeleteCartItem(Guid id)
         {
             string sql = " Update Status FROM CartItem  Where Id = @id ";
@@ -50,7 +52,7 @@ namespace ESHOPDAL.Repository.Services
             connection.Execute(sql);
         }
 
-
+        // modification of cart item - user
         public void UpdateCartItemInfo(CartItem cartItem, string info, Guid id)
         {
             string sql = $"UPDATE CartItem SET {info} = @Value WHERE Id = @Id";
@@ -59,12 +61,11 @@ namespace ESHOPDAL.Repository.Services
             parameters.Add("@Id", id);
 
             // Utilisez la réflexion pour obtenir la valeur de la propriété
-            object propertyValue = typeof(CartItem).GetProperty(info)?.GetValue(cartItem);
+            object? propertyValue = typeof(CartItem).GetProperty(info)?.GetValue(cartItem);
             parameters.Add("@Value", propertyValue);
 
             connection.Execute(sql, parameters);
         }
-
 
     }
 }

@@ -17,7 +17,7 @@ namespace ESHOPDAL.Repository.Services
             this.connection = connection;
         }
 
-        //METHODES
+        //Create new category with a name - admin
         public void CreateCategory(CreateCategory category)
         {
             string sql = "INSERT INTO Category (Name) VALUES (@name)";
@@ -29,7 +29,7 @@ namespace ESHOPDAL.Repository.Services
             connection.Execute(sql, parameters );
         }
 
-
+        //get all categories - user
         public IEnumerable<Category> GetCategories()
         {
             string sql = " SELECT * FROM Category";
@@ -37,26 +37,36 @@ namespace ESHOPDAL.Repository.Services
             return connection.Query<Category>(sql);
         }
 
-
-        public Category GetCategory(Guid id)
+        //get a category with id  - admin
+        public Category GetCategoryById(Guid id)
         {
-            return connection.QueryFirst<Category>(" SELECT * FROM Category WHERE Id = @id ");
+            return connection.QueryFirst<Category>(" SELECT * FROM Category WHERE Id = @id ", new {id} );
         } 
 
+        //get a category by name - user
         public Category GetCategoryByName(string name)
         {
             return connection.QueryFirst<Category>("SELECT * FROM Category WHERE Name = @name", new { name });
         }
 
-
-        public void UpdateCategory(Category category)
+        // update category name - admin
+        public void UpdateCategory(Category category , Guid id)
         {
             string sql = "UPDATE Category SET Name = @name WHERE Id = @id ";
             var parameters = new DynamicParameters();
             parameters.Add("@Name", category.Name);
-            parameters.Add("@Id" , category.Id);
+            parameters.Add("@Id" , id);
 
             connection.Execute(sql, parameters);
         }
+
+        //delete a category - admin
+        public void DeleteCategory(Guid id)
+        {
+            string sql = "DROP * FROM Category WHERE Id = @id";
+
+            connection.Execute(sql, new {id});
+        }
+
     }
 }

@@ -23,14 +23,17 @@ namespace ESHOPBLL.Repository.Services
             favoriteItemService.AddFavoriteItem(favorite);
         }
 
+
         public void DeleteFavoriteItem(FavoriteItem favorite)
         {
             favoriteItemService.DeleteFavoriteItem(favorite);
         }
 
+
         public IEnumerable<FavoriteItem> GetFavoriteItemByUser(Guid id)
         {
             return favoriteItemService.GetFavoriteItemByUser(id);
         }
+
     }
 }

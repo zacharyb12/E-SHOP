@@ -5,6 +5,7 @@ namespace ESHOPBLL.Repository.Interfaces
 {
     public interface IProductReviewServiceBLL
     {
+
         void CreateProductReview(CreateProductReview product);
 
         IEnumerable<ProductReview> GetProductReviewByRating(int rating);
@@ -16,5 +17,6 @@ namespace ESHOPBLL.Repository.Interfaces
         IEnumerable<ProductReview> GetProductReviewByProductId(Guid id);
 
         IEnumerable<ProductReview> GetProductReviews();
+
     }
 }
